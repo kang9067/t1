@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="{DaoSuperPackage}.{DaoClassName}">
+    <resultMap id="BaseResultMap" type="{EntityPackage}">
+        <id column="{PrimaryColumn}" property="{PrimaryFeild}" />
+{FeildMapList}
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        {FeildJoinId}
+    </sql>
+    
+    <select id="selectByPrimaryColumn" parameterType="java.lang.{PrimaryJavaType}" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from {TableName}
+        where {PrimaryColumn} = #{{PrimaryFeild}}
+    </select>
+  
+    <select id="select" parameterType="{EntityPackage}" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from {TableName}
+        where 1 = 1
+{FeildIfList}
+    </select>
+    
+    <delete id="deleteByPrimaryColumn" parameterType="java.lang.{PrimaryJavaType}">
+        delete from {TableName} where {PrimaryColumn} = #{{PrimaryFeild}}
+    </delete>
+    
+    <insert id="insert" parameterType="{EntityPackage}">
+        insert into {TableName} (
+{FeildJoin}
+        )
+        values (
+{FeildMapJoin}
+        )
+    </insert>
+  
+    <insert id="insertSelective" parameterType="{EntityPackage}">
+        insert into {TableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+{FeildIfJoin}
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+{FeildIfMapJoin}
+        </trim>
+    </insert>
+  
+    <update id="updateByPrimaryColumnSelective" parameterType="{EntityPackage}">
+        update {TableName}
+        <set>
+{FeildIfSetList}
+        </set>
+        where {PrimaryColumn} = #{{PrimaryFeild}}
+    </update>
+    
+    <update id="updateByPrimaryColumn" parameterType="{EntityPackage}">
+        update {TableName}
+        set 
+{FeildSetList}
+        where {PrimaryColumn} = #{{PrimaryFeild}}
+    </update>
+    
+    <insert id="insertBatch" parameterType="java.util.List">  
+        insert into {TableName} (
+            {FeildJoin}
+        )
+        values 
+        <foreach collection="list" index="index" item="item" separator=",">  
+        (
+{ForeachFeildMapJoin}
+        )
+        </foreach>
+    </insert>
+  
+    <update id="updateBatch" parameterType="java.util.List"> 
+        update {TableName}
+        set 
+{FeildSetList}
+        where {PrimaryColumn} = #{{PrimaryFeild}}
+        <foreach close=")" collection="idList" index="index" item="item" open="(" separator=",">     
+            #{item}
+        </foreach>
+    </update>
+ 
+    <delete id="deleteBatch" parameterType="java.util.List"> 
+        DELETE FROM {TableName} WHERE {PrimaryColumn} IN 
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">  
+            #{item}  
+        </foreach> 
+    </delete>
+ 
+</mapper>

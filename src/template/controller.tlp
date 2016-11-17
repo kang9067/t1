@@ -1,0 +1,52 @@
+package {ControllerSuperPackage};
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import {EntitySuperPackage}.base.BaseArgument;
+import {IServicePackage};
+
+@Controller
+@RequestMapping("/{ControllerNameLower}")
+public class {ControllerName} extends BaseController {
+	private final static Logger log = Logger.getLogger({ControllerName}.class);
+	
+	@Resource(name="ServiceNameLower")
+    I{EntityName}Service {ServiceNameLower};
+	
+	@RequestMapping("/load{EntityName}List")
+    public String load{EntityName}List() {
+    	return null;
+    }
+    
+    @RequestMapping("/add{EntityName}")
+    public String add{EntityName}() {
+    	return null;
+    }
+    
+    @RequestMapping("/edit{EntityName}")
+    public String edit{EntityName}() {
+    	return null;
+    }
+    
+    @RequestMapping("/del{EntityName}")
+    public String del{EntityName}() {
+    	return null;
+    }
+
+}

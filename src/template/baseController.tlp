@@ -1,0 +1,124 @@
+package {ControllerSuperPackage}.base;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.alibaba.fastjson.JSON;
+import {EntitySuperPackage}.base.BaseArgument;
+import {ServiceSuperPackage}.base.IBaseService;
+
+public class BaseController {
+	private final static Logger log = Logger.getLogger(BaseController.class);
+	
+	protected HttpServletRequest request;
+	protected HttpServletResponse response;
+	protected HttpSession session;
+	
+	@Resource(name="baseService")
+	public IBaseService baseService;
+		
+	@ModelAttribute
+	public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+		this.session = request.getSession();
+	}
+
+	/**
+	 * 获取用户
+	 */
+	protected Object getUserInfo() {
+		// TODO
+		return null;
+	}
+	
+	public String getUserId(){
+	    // TODO
+		return "";
+	}
+	
+	/**
+	 * 输出数据到前端
+	 * @param str
+	 */
+	private void outString(String str) {
+        try {
+            response.setCharacterEncoding("text/html;UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            ServletOutputStream sos = response.getOutputStream();
+            if(str == null){
+            	str = "";
+            }
+            sos.write(str.getBytes("UTF-8"));
+            sos.flush();
+            sos.close();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+	
+	/**
+	 * 输出Object对象到前端页面（最终都是封装成BaseArgument对象）
+	 * @param obj
+	 */
+	protected void out(Object obj) {
+        try {
+            if(obj instanceof BaseArgument){
+                outString(JSON.toJSONString(obj));
+            } else {
+                BaseArgument br = new BaseArgument();
+                br.success();
+                if(obj == null){
+                    br.setDataToRtn(new HashMap<String, Object>());
+                } else {
+                    br.setDataToRtn(obj);
+                }
+                outString(JSON.toJSONString(br));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+    
+	/**
+	 * 输出BaseArgument对象到前端页面
+	 * @param obj
+	 */
+	protected void out(BaseArgument br) {
+        try {
+            outString(JSON.toJSONString(br));
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+	/**
+	 * 输出List对象到前端页面（最终都是封装成BaseArgument对象）
+	 * @param obj
+	 */
+	protected void out(List<Object> list) {
+        try {
+            BaseArgument br = new BaseArgument();
+            br.success();
+            if(list == null){
+                br.setDataToRtn(new ArrayList<Object>());
+            } else {
+                br.setDataToRtn(list);
+            }
+            outString(JSON.toJSONString(br));
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+	
+}

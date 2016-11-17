@@ -1,0 +1,172 @@
+package {ServiceSuperPackage}.base;
+
+import java.util.List;
+import java.util.Map;
+
+import {EntitySuperPackage}.base.BaseArgument;
+import com.github.pagehelper.Page;
+
+public interface IBaseService {
+
+    /**
+     * 插入记录
+     */
+    public <T> BaseArgument insert(T record);
+
+    /**
+     * 插入记录
+     */
+    public <T> BaseArgument insertSelecitve(T record);
+
+    /**
+     * 插入记录
+     */
+    public <T> BaseArgument insert(String mapperId, T record);
+
+    /**
+     * 插入有效记录
+     */
+    public BaseArgument insertBySelective(Class<?> clasz, Object obj);
+    
+    /**
+     * 根据主键修改全部属性
+     */
+    public <T> BaseArgument updateByPrimaryKey(T record);
+    
+    /**
+     * 根据条件修改有效数据
+     */
+    public <T> BaseArgument updateSelective(String mapperId, T record);
+
+    /**
+     * 根据主键修改有效属性
+     */
+    public <T> BaseArgument updateByPrimaryKeySelective(T record);
+
+    /**
+     * 根据主键修改全部属性
+     */
+    public <T> BaseArgument updateByPrimaryKey(String mapperId, T record);
+    
+    /**
+     * 根据条件修改全部属性
+     */
+    public <T> BaseArgument update(T record);
+    
+    /**
+     * 根据条件修改全部属性
+     */
+    public <T> BaseArgument update(String mapperId, T record);
+
+    /**
+     * 根据主键删除
+     */
+    public BaseArgument deleteByPrimaryKey(Class<?> clasz, Object key);
+    
+    /**
+     * 根据主键删除
+     */
+    public BaseArgument deleteByPrimaryKey(String mapperId, Object key);
+
+    /**
+     * 根据主键删除
+     */
+    public BaseArgument deleteByInPrimaryKey(Class<?> clasz, List<Object> key);
+
+    /**
+     * 根据主键删除
+     */
+    public BaseArgument deleteInPrimaryKey(String mapperId, List<Object> keys);
+
+
+    /**
+     * 根据条件删除
+     */
+    public BaseArgument delete(Class<?> clasz, Object key);
+    
+    /**
+     * 根据条件删除
+     */
+    public BaseArgument delete(String mapperId, Object key);
+    
+    /**
+     * 根据主键查询单一记录
+     */
+    public BaseArgument selectByPrimaryKey(Class<?> clasz, Object key);
+
+    /**
+     * 根据主键查询单一记录
+     */
+    public BaseArgument selectByPrimaryKey(String mapperId, Object key);
+
+    /**
+     * 根据条件查询多条记录
+     */
+    public BaseArgument select(Class<?> clasz, Map<String, Object> param);
+    
+    /**
+     * 根据条件查询多条记录
+     */
+    public BaseArgument select(String mapperId, Map<String, Object> param);
+
+    /**
+     * 根据条件查询多条记录
+     */
+    public <T> BaseArgument select(T record);
+    
+    /**
+     * 根据条件查询多条记录，带分页
+     */
+    public BaseArgument select(Class<?> clasz, Map<String, Object> param, Page page);
+    
+    /**
+     * 根据条件查询多条记录，带分页
+     */
+    public BaseArgument select(String mapperId, Map<String, Object> param, Page page);
+    
+    /**
+     * 根据条件查询多条记录，带分页
+     */
+    public <T> BaseArgument select(T record, Page page);
+    
+    /**
+     * 根据条件查询多条记录，带分页
+     */
+    public <T> BaseArgument select(String mapperId, T record, Page page);
+
+    /**
+     * 根据条件查询多条记录
+     */
+    public <T> BaseArgument select(String mapperId, T record);
+
+    /**
+     * 批量插入
+     */
+    public <T> BaseArgument insertBatch(Class<?> clasz, List<T> entitys);
+
+    /**
+     * 批量插入
+     */
+    public <T> BaseArgument insertBatch(String mapperId, List<T> entitys);
+
+    /**
+     * 批量修改
+     */
+    public <T> BaseArgument updateBatch(String mapperId, List<T> entitys);
+
+    /**
+     * 批量删除
+     */
+    public <T> BaseArgument deleteBatch(String mapperId, List<T> entitys);
+
+    /**
+     * 批量修改
+     */
+    public <T> BaseArgument updateBatch(Class<?> clasz, List<T> entitys);
+
+    /**
+     * 批量删除
+     */
+    public <T> BaseArgument deleteBatch(Class<?> clasz, List<T> entitys);
+    
+}
