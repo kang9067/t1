@@ -18,8 +18,8 @@ public class DBConnection {
     private static String url = "jdbc:mysql://{0}:{1}/{2}?useUnicode=true&characterEncoding={3}";
     private static String dnurl = "";
     private static String port = "3306";
-    private static String username = "";
-    private static String password = "";
+    private static String username = "root";
+    private static String password = "123456";
 
     private Connection conn = null;
 
@@ -46,6 +46,7 @@ public class DBConnection {
             // 加载MySql的驱动类
             Class.forName("com.mysql.jdbc.Driver");
             // 连接MySql数据库，用户名和密码都是root
+            //dnurl = url;
             conn = DriverManager.getConnection(dnurl, username, password);
         } catch (Exception e) {
             logger.error("找不到驱动程序类 ，加载驱动失败！", e);

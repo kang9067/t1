@@ -1,5 +1,6 @@
 package {IServiceSuperPackage};
 
+import service.impl.base.IBaseService;
 import {EntityPackage};
 import {EntitySupperPackage}.base.BaseArgument;
 

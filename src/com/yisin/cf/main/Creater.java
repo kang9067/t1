@@ -415,7 +415,10 @@ public class Creater {
     						&& !column.getColumnName().toLowerCase().equals("createtime")
     						&& !column.getColumnName().toLowerCase().equals("id")) {
     					attr = Utililies.tableToEntity(column.getColumnName());
-    					content = Utililies.readResourceFile(dir + "getset.tlp");
+    					if(column.getColumnType().equalsIgnoreCase("datetime")){
+    						content = Utililies.readResourceFile(dir + "dategetset.tlp");
+        				}else 
+        					content = Utililies.readResourceFile(dir + "getset.tlp");
     					content = Utililies.parseTemplate(content, "EntityName", getEntityName());
     					content = Utililies.parseTemplate(content, "AttrName", CommonUtils.firstCharToUpperCase(attr));
     					content = Utililies.parseTemplate(content, "attrName", CommonUtils.firstCharToLowerCase(attr));

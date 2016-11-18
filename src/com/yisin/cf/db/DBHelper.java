@@ -21,12 +21,12 @@ public class DBHelper {
 
     private static DBConnection dbconn = new DBConnection();
 
-    public static String ip = "192.168.10.51";
+    public static String ip = "127.0.0.1";
     public static String port = "3306";
-    public static String schema = "community";
+    public static String schema = "part";
     public static String encode = "utf-8";
     public static String userName = "root";
-    public static String pwd = "password";
+    public static String pwd = "123456";
     public static String sections = "";
 
     public static void initDbConfig() {
