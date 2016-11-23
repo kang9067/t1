@@ -22,31 +22,34 @@ import {EntitySuperPackage}.base.BaseArgument;
 import {IServicePackage};
 
 @Controller
-@RequestMapping("/{ControllerNameLower}")
-public class {ControllerName} extends BaseController {
-	private final static Logger log = Logger.getLogger({ControllerName}.class);
+@RequestMapping("admin/{ControllerNameLower}")
+public class {ControllerName}Admin extends AdminController {
+	private final static Logger log = Logger.getLogger({ControllerName}Admin.class);
 	
-	@Resource(name="ServiceNameLower")
+	@Autowired
     I{EntityName}Service {ServiceNameLower};
 	
-	@RequestMapping("/load{EntityName}List")
-    public String load{EntityName}List() {
+	@RequestMapping("/list.html")
+    public String loadHtmlList() {
     	return null;
     }
     
-    @RequestMapping("/add{EntityName}")
-    public String add{EntityName}() {
+    @RequestMapping("/add_chk.html")
+    public String addHtml() {
     	return null;
     }
     
-    @RequestMapping("/edit{EntityName}")
-    public String edit{EntityName}() {
+    @RequestMapping("/edit_chk.html")
+    public String editHtml() {
     	return null;
     }
     
-    @RequestMapping("/del{EntityName}")
-    public String del{EntityName}() {
+    @RequestMapping("/del.html")
+    public String delHtml() {
     	return null;
     }
-
+	@Override
+	protected ModelAndView createView(String path, ModelMap modelMap) {
+		return super.createView("system/"+path, modelMap);
+	}
 }
